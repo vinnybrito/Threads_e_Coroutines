@@ -2,6 +2,7 @@ package com.vinicius.threadscoroutines
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.vinicius.threadscoroutines.databinding.ActivityMainBinding
 
@@ -24,7 +25,18 @@ class MainActivity : AppCompatActivity() {
             )
         }
         binding.btnIniciar.setOnClickListener {
+            MinhaThread().start()
+        }
+    }
 
+    // Abaixo está a Thread que estou criando
+    inner class MinhaThread : Thread() {
+        override fun run() {
+            super.run()
+            repeat(30) { indice ->
+                Log.i("info_thread", "Executando $indice T: ${currentThread().name}")
+                sleep(1000) // ms 1000 -> 1 segundo
+            }
         }
     }
 }
